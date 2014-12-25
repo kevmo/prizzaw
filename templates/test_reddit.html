@@ -1,0 +1,32 @@
+{# TODO: For testing front-end twitter OAuth flow only. This logic should be moved. #}
+<body style="background:gray;">
+
+<style >
+    button {
+        margin: 1%;
+        display: inline-block;
+        widows: 50;%;
+        text-align: center;
+    }
+</style >
+<div style="height:100%; width:100%; background:gray; margin:25%">
+    <button id='reddit_connect'>connect ur fuckin reddit account</button>
+</div>
+<script>
+// connect twitter to logged in account
+    document.querySelector('#reddit_connect').addEventListener('click', function(){
+        window.open('{{ connect_url }}');
+    });
+    // listen for message, which should contain logged-in user
+    window.addEventListener('message', receiveMessage, false);
+    function receiveMessage (e) {
+        if (e.origin === "{{ base_url }}"){
+            console.dir(JSON.parse(e.data));
+            var success  = document.createElement('div');
+            success.innerHTML = "YOU DONE IT";
+            document.body.appendChild(success);
+        }
+    }
+
+</script>
+</body>
